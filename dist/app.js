@@ -10420,12 +10420,16 @@ function blocksPage() {
         let blockCount = yield ajax.post('getblockcount', []);
         //分页查询区块数据
         $("#blocks").empty();
-        let pageUtil = new Entitys_1.PageUtil(blockCount, 15);
+        let pageUtil = new Entitys_1.PageUtil(blockCount[0]['blockcount'], 15);
         let block = new blocks_1.Block();
         block.updateBlocks(pageUtil);
         //监听下一页
         $("#next").click(() => {
             pageUtil.currentPage += 1;
+            block.updateBlocks(pageUtil);
+        });
+        $("#previous").click(() => {
+            pageUtil.currentPage -= 1;
             block.updateBlocks(pageUtil);
         });
     });
@@ -10463,7 +10467,9 @@ class PageUtil {
         this._currentPage = 1;
         this._totalCount = total;
         this._pageSize = pageSize;
-        this._totalPage = total % pageSize == 0 ? total / pageSize : Math.ceil(total / pageSize);
+        this._totalPage = total % pageSize == 0 ? total / pageSize : Math.ceil((total / pageSize));
+        console.log(Math.ceil((total / pageSize)));
+        console.log('constructor-totalPage:' + this._totalPage);
     }
     ;
     /**
@@ -10507,6 +10513,7 @@ class PageUtil {
  */
     get totalPage() {
         this._totalPage = this._totalCount % this._pageSize == 0 ? this._totalCount / this._pageSize : Math.ceil(this._totalCount / this._pageSize);
+        console.log('totalPage:' + this._totalPage);
         return this._totalPage;
     }
 }
@@ -10537,6 +10544,18 @@ class Block {
             let ajax = new Ajax_1.Ajax();
             let blocks = yield ajax.post('getblocks', [pageUtil.pageSize, pageUtil.currentPage]);
             $("#blocks").empty();
+            if (pageUtil.totalPage - (pageUtil.currentPage + 1)) {
+                $("#next").removeClass('disabled');
+            }
+            else {
+                $("#next").addClass('disabled');
+            }
+            if (pageUtil.currentPage - 1) {
+                $("#next").removeClass('disabled');
+            }
+            else {
+                $("#next").addClass('disabled');
+            }
             blocks.forEach((item, index, input) => {
                 var newDate = new Date();
                 newDate.setTime(item['time'] * 1000);

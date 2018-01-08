@@ -32,11 +32,10 @@ async function indexPage(){
 async function blocksPage(){
     //查询区块数量
     let blockCount = await ajax.post('getblockcount',[]);
-    
     //分页查询区块数据
     $("#blocks").empty();
     
-    let pageUtil:PageUtil = new PageUtil(blockCount,15);
+    let pageUtil:PageUtil = new PageUtil(blockCount[0]['blockcount'],15);
 
     let block:Block = new Block();
     block.updateBlocks(pageUtil);
@@ -44,6 +43,10 @@ async function blocksPage(){
     //监听下一页
     $("#next").click(()=>{
         pageUtil.currentPage +=1;
+        block.updateBlocks(pageUtil);
+    });
+    $("#previous").click(()=>{
+        pageUtil.currentPage -=1;
         block.updateBlocks(pageUtil);
     });
 }

@@ -8,6 +8,17 @@ export class Block{
         let ajax:Ajax = new Ajax();
         let blocks = await ajax.post('getblocks',[pageUtil.pageSize,pageUtil.currentPage]);
         $("#blocks").empty();
+        if(pageUtil.totalPage-(pageUtil.currentPage+1)){
+            
+            $("#next").removeClass('disabled');
+        }else{
+            $("#next").addClass('disabled');
+        }
+        if(pageUtil.currentPage-1){
+            $("#next").removeClass('disabled');
+        }else{
+            $("#next").addClass('disabled');
+        }
         blocks.forEach((item,index,input)=>{
             var newDate = new Date();
             newDate.setTime(item['time'] * 1000);
