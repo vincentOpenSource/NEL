@@ -60,173 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const $ = __webpack_require__(1);
-class Ajax {
-    constructor() { }
-    /**
-     * async post
-     */
-    post(method, params) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let promise = new Promise((resolve, reject) => {
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://47.96.168.8:81/api/testnet',
-                    dataType: 'json',
-                    data: JSON.stringify({
-                        "jsonrpc": "2.0",
-                        "method": method,
-                        "params": params,
-                        "id": 1
-                    }),
-                    success: (data, status) => {
-                        resolve(data['result']);
-                    },
-                    error: () => {
-                        reject("请求失败");
-                    }
-                });
-            });
-            return promise;
-        });
-    }
-}
-exports.Ajax = Ajax;
-let ajax = new Ajax();
-class PageUtil {
-    /**
-     *
-     * @param total 总记录数
-     * @param pageSize 每页条数
-     */
-    constructor(total, pageSize) {
-        this._currentPage = 0;
-        this._totalCount = total;
-        this._pageSize = pageSize;
-        this._totalPage = total % pageSize == 0 ? total / pageSize : Math.ceil(total / pageSize);
-    }
-    ;
-    /**
-     * currentPage 返回当前页码
-     */
-    get currentPage() {
-        return this._currentPage;
-    }
-    /**
-     *
-     */
-    set currentPage(currentPage) {
-        this._currentPage = currentPage;
-    }
-    /**
-     * pageSize 每页条数
-     */
-    get pageSize() {
-        return this._pageSize;
-    }
-    /**
-     * set count
-     */
-    set pageSize(pageSize) {
-        this._pageSize = pageSize;
-    }
-    /**
-     * pageSize 每页条数
-     */
-    get totalCount() {
-        return this._totalCount;
-    }
-    /**
-     * set count
-     */
-    set totalCount(totalCount) {
-        this._totalCount = totalCount;
-    }
-    /**
- * pageSize 总页数
- */
-    get totalPage() {
-        this._totalPage = this._totalCount % this._pageSize == 0 ? this._totalCount / this._pageSize : Math.ceil(this._totalCount / this._pageSize);
-        return this._totalPage;
-    }
-}
-exports.PageUtil = PageUtil;
-//主页
-function indexPage() {
-    return __awaiter(this, void 0, void 0, function* () {
-        //查询区块高度(区块数量-1)
-        let blockCount = yield ajax.post('getblockcount', []);
-        let blockHeight = blockCount[0]['blockcount'] - 1;
-        $("#blockHeight").text(blockHeight.toLocaleString()); //显示在页面
-        //查询交易数量
-        let txcount = yield ajax.post('gettxcount', []);
-        txcount = txcount[0]['txcount'];
-        $("#txcount").text(txcount.toLocaleString()); //显示在页面
-        //分页查询区块数据
-        let blocks = yield ajax.post('getblocks', [10, 1]);
-        blocks.forEach((item, index, input) => {
-            var newDate = new Date();
-            newDate.setTime(item['time'] * 1000);
-            $("#blocks").append('<tr><td>' + item['index'] + '</td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
-        });
-    });
-}
-;
-//区块列表
-function blocksPage() {
-    return __awaiter(this, void 0, void 0, function* () {
-        //查询区块数量
-        let blockCount = yield ajax.post('getblockcount', []);
-        //分页查询区块数据
-        $("#blocks").empty();
-        let pageUtil = new PageUtil(blockCount, 15);
-        $("#next").click(() => {
-            alert('上一页');
-        });
-        let blocks = yield ajax.post('getblocks', [pageUtil.pageSize, 1]);
-        blocks.forEach((item, index, input) => {
-            var newDate = new Date();
-            newDate.setTime(item['time'] * 1000);
-            $("#blocks").append('<tr><td>' + item['index'] + '</td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
-        });
-    });
-}
-//jquery $()
-$(() => {
-    let page = $('#page').val();
-    console.log(page);
-    if (page === 'index') {
-        indexPage();
-    }
-    if (page === 'blocks') {
-        let index = 0; //
-        blocksPage();
-    }
-    if (page === 'transction') {
-    }
-});
-
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10483,6 +10321,231 @@ if ( !noGlobal ) {
 
 return jQuery;
 } );
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const $ = __webpack_require__(0);
+class Ajax {
+    constructor() { }
+    /**
+     * async post
+     */
+    post(method, params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let promise = new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://47.96.168.8:81/api/testnet',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        "jsonrpc": "2.0",
+                        "method": method,
+                        "params": params,
+                        "id": 1
+                    }),
+                    success: (data, status) => {
+                        resolve(data['result']);
+                    },
+                    error: () => {
+                        reject("请求失败");
+                    }
+                });
+            });
+            return promise;
+        });
+    }
+}
+exports.Ajax = Ajax;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const $ = __webpack_require__(0);
+const Ajax_1 = __webpack_require__(1);
+const Entitys_1 = __webpack_require__(3);
+const blocks_1 = __webpack_require__(4);
+let ajax = new Ajax_1.Ajax();
+//主页
+function indexPage() {
+    return __awaiter(this, void 0, void 0, function* () {
+        //查询区块高度(区块数量-1)
+        let blockCount = yield ajax.post('getblockcount', []);
+        let blockHeight = blockCount[0]['blockcount'] - 1;
+        $("#blockHeight").text(blockHeight.toLocaleString()); //显示在页面
+        //查询交易数量
+        let txcount = yield ajax.post('gettxcount', []);
+        txcount = txcount[0]['txcount'];
+        $("#txcount").text(txcount.toLocaleString()); //显示在页面
+        //分页查询区块数据
+        let blocks = yield ajax.post('getblocks', [10, 1]);
+        blocks.forEach((item, index, input) => {
+            var newDate = new Date();
+            newDate.setTime(item['time'] * 1000);
+            $("#blocks").append('<tr><td>' + item['index'] + '</td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
+        });
+    });
+}
+;
+//区块列表
+function blocksPage() {
+    return __awaiter(this, void 0, void 0, function* () {
+        //查询区块数量
+        let blockCount = yield ajax.post('getblockcount', []);
+        //分页查询区块数据
+        $("#blocks").empty();
+        let pageUtil = new Entitys_1.PageUtil(blockCount, 15);
+        let block = new blocks_1.Block();
+        block.updateBlocks(pageUtil);
+        //监听下一页
+        $("#next").click(() => {
+            pageUtil.currentPage += 1;
+            block.updateBlocks(pageUtil);
+        });
+    });
+}
+//jquery $()
+$(() => {
+    let page = $('#page').val();
+    console.log(page);
+    if (page === 'index') {
+        indexPage();
+    }
+    if (page === 'blocks') {
+        let index = 0; //
+        blocksPage();
+    }
+    if (page === 'transction') {
+    }
+});
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class PageUtil {
+    /**
+     *
+     * @param total 总记录数
+     * @param pageSize 每页条数
+     */
+    constructor(total, pageSize) {
+        this._currentPage = 1;
+        this._totalCount = total;
+        this._pageSize = pageSize;
+        this._totalPage = total % pageSize == 0 ? total / pageSize : Math.ceil(total / pageSize);
+    }
+    ;
+    /**
+     * currentPage 返回当前页码
+     */
+    get currentPage() {
+        return this._currentPage;
+    }
+    /**
+     *
+     */
+    set currentPage(currentPage) {
+        this._currentPage = currentPage;
+    }
+    /**
+     * pageSize 每页条数
+     */
+    get pageSize() {
+        return this._pageSize;
+    }
+    /**
+     * set count
+     */
+    set pageSize(pageSize) {
+        this._pageSize = pageSize;
+    }
+    /**
+     * pageSize 每页条数
+     */
+    get totalCount() {
+        return this._totalCount;
+    }
+    /**
+     * set count
+     */
+    set totalCount(totalCount) {
+        this._totalCount = totalCount;
+    }
+    /**
+ * pageSize 总页数
+ */
+    get totalPage() {
+        this._totalPage = this._totalCount % this._pageSize == 0 ? this._totalCount / this._pageSize : Math.ceil(this._totalCount / this._pageSize);
+        return this._totalPage;
+    }
+}
+exports.PageUtil = PageUtil;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const $ = __webpack_require__(0);
+const Ajax_1 = __webpack_require__(1);
+class Block {
+    constructor() { }
+    updateBlocks(pageUtil) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let ajax = new Ajax_1.Ajax();
+            let blocks = yield ajax.post('getblocks', [pageUtil.pageSize, pageUtil.currentPage]);
+            $("#blocks").empty();
+            blocks.forEach((item, index, input) => {
+                var newDate = new Date();
+                newDate.setTime(item['time'] * 1000);
+                $("#blocks").append('<tr><td>' + item['index'] + '</td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
+            });
+        });
+    }
+}
+exports.Block = Block;
 
 
 /***/ })
