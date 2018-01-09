@@ -10437,7 +10437,6 @@ function blocksPage() {
 //jquery $()
 $(() => {
     let page = $('#page').val();
-    console.log(page);
     if (page === 'index') {
         indexPage();
     }
@@ -10446,6 +10445,12 @@ $(() => {
         blocksPage();
     }
     if (page === 'transction') {
+    }
+    if (page === 'blockInfo') {
+        let blockIndex = location.hash.slice(1);
+        alert(blockIndex);
+        let block = new blocks_1.Block();
+        block.queryBlock(blockIndex);
     }
 });
 
@@ -10468,8 +10473,6 @@ class PageUtil {
         this._totalCount = total;
         this._pageSize = pageSize;
         this._totalPage = total % pageSize == 0 ? total / pageSize : Math.ceil((total / pageSize));
-        console.log(Math.ceil((total / pageSize)));
-        console.log('constructor-totalPage:' + this._totalPage);
     }
     ;
     /**
@@ -10513,7 +10516,6 @@ class PageUtil {
  */
     get totalPage() {
         this._totalPage = this._totalCount % this._pageSize == 0 ? this._totalCount / this._pageSize : Math.ceil(this._totalCount / this._pageSize);
-        console.log('totalPage:' + this._totalPage);
         return this._totalPage;
     }
 }
@@ -10559,8 +10561,20 @@ class Block {
             blocks.forEach((item, index, input) => {
                 var newDate = new Date();
                 newDate.setTime(item['time'] * 1000);
-                $("#blocks").append('<tr><td>' + item['index'] + '</td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
+                $("#blocks").append('<tr><td><a href"../page/blockInfo.html">' + item['index'] + '</a></td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
             });
+        });
+    }
+    queryBlock(index) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let ajax = new Ajax_1.Ajax();
+            var newDate = new Date();
+            let block = yield ajax.post('getblock', [index]);
+            newDate.setTime(block[0]['time'] * 1000);
+            $("#hash").text(block[0]['hash']);
+            $("#size").text(block[0]['size'] + ' byte');
+            $("#time").text(newDate.toLocaleString());
+            $("#version").text(block[0]['version']);
         });
     }
 }

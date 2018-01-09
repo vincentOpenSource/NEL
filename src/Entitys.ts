@@ -14,8 +14,6 @@ export class PageUtil{
         this._totalCount=total;
         this._pageSize = pageSize;
         this._totalPage = total % pageSize == 0 ? total / pageSize : Math.ceil((total / pageSize)) ;
-        console.log(Math.ceil((total/pageSize)));
-        console.log('constructor-totalPage:'+this._totalPage);
     };
     /**
      * currentPage 返回当前页码
@@ -58,7 +56,6 @@ export class PageUtil{
      */
     public get totalPage() {
         this._totalPage=this._totalCount % this._pageSize == 0 ? this._totalCount / this._pageSize : Math.ceil(this._totalCount / this._pageSize);
-        console.log('totalPage:'+this._totalPage);
         return this._totalPage;
     }
 }

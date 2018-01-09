@@ -54,7 +54,6 @@ async function blocksPage(){
 //jquery $()
 $(()=>{
     let page = $('#page').val();
-    console.log(page);
     if(page==='index'){
         indexPage();
     }
@@ -65,5 +64,12 @@ $(()=>{
     }
     if(page==='transction'){
 
+    }
+    if(page==='blockInfo'){
+        let blockIndex:any= location.hash.slice(1);
+        alert(blockIndex);
+        let block:Block = new Block();
+        block.queryBlock(blockIndex);
+        
     }
 });
