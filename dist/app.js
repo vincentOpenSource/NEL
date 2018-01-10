@@ -10439,10 +10439,16 @@ $(() => {
     let page = $('#page').val();
     if (page === 'index') {
         indexPage();
+        $("#searchBtn").click(() => {
+            window.location.href = './page/blockInfo.html?index=' + $("#searchText").val();
+        });
     }
     if (page === 'blocks') {
         let index = 0; //
         blocksPage();
+        $("#searchBtn").click(() => {
+            window.location.href = './blockInfo.html?index=' + $("#searchText").val();
+        });
     }
     if (page === 'transction') {
     }
@@ -10450,6 +10456,9 @@ $(() => {
         let index = Number(GetQueryString("index"));
         let block = new blocks_1.Block();
         block.queryBlock(index);
+        $("#searchBtn").click(() => {
+            window.location.href = './blockInfo.html?index=' + $("#searchText").val();
+        });
     }
 });
 /**

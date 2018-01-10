@@ -56,11 +56,17 @@ $(()=>{
     let page = $('#page').val();
     if(page==='index'){
         indexPage();
+        $("#searchBtn").click(()=>{
+            window.location.href='./page/blockInfo.html?index='+$("#searchText").val();
+        });
     }
     
     if(page==='blocks'){
         let index:number = 0;      //
         blocksPage();
+        $("#searchBtn").click(()=>{
+            window.location.href='./blockInfo.html?index='+$("#searchText").val();
+        });
     }
     if(page==='transction'){
 
@@ -69,6 +75,9 @@ $(()=>{
         let index:number = Number(GetQueryString("index"));
         let block:Block = new Block();
         block.queryBlock(index);
+        $("#searchBtn").click(()=>{
+            window.location.href='./blockInfo.html?index='+$("#searchText").val();
+        });
     }
 });
 
