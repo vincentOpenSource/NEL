@@ -10574,7 +10574,7 @@ class Block {
             blocks.forEach((item, index, input) => {
                 var newDate = new Date();
                 newDate.setTime(item['time'] * 1000);
-                $("#blocks").append('<tr><td><a href="../page/blockInfo.html?name=' + item['index'] + '">' + item['index'] + '</a></td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
+                $("#blocks").append('<tr><td><a href="../page/blockInfo.html?index=' + item['index'] + '">' + item['index'] + '</a></td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
             });
         });
     }
@@ -10588,6 +10588,7 @@ class Block {
             $("#size").text(block[0]['size'] + ' byte');
             $("#time").text(newDate.toLocaleString());
             $("#version").text(block[0]['version']);
+            console.log(block);
         });
     }
 }
