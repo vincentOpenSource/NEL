@@ -21,7 +21,7 @@ export class Block{
         blocks.forEach((item,index,input)=>{
             var newDate = new Date();
             newDate.setTime(item['time'] * 1000);
-            $("#blocks").append('<tr><td><a href"localhost/NEL/page/blockInfo.html?name='+item['index']+'">'+item['index']+'</a></td><td>'+item['size']+' bytes</td><td>'+newDate.toLocaleString()+'</td></tr>')
+            $("#blocks").append('<tr><td><a href="../page/blockInfo.html?name='+item['index']+'">'+item['index']+'</a></td><td>'+item['size']+' bytes</td><td>'+newDate.toLocaleString()+'</td></tr>')
         });
     }
     public async queryBlock(index:number){
