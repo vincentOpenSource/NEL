@@ -10368,8 +10368,36 @@ class Ajax {
             return promise;
         });
     }
+    /**
+     * async post
+     */
+    get() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let promise = new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://47.96.168.8:4431/api/testnet?jsonrpc=2.0&method=getblock&params=%5b1000%5d&id=1001',
+                    success: (data, status) => {
+                        resolve(data['result']);
+                    },
+                    error: () => {
+                        reject("请求失败");
+                    }
+                });
+            });
+            return promise;
+        });
+    }
 }
 exports.Ajax = Ajax;
+function test() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let ajax = new Ajax();
+        let test = yield ajax.get();
+        console.log(test);
+    });
+}
+test();
 
 
 /***/ }),
@@ -10425,10 +10453,18 @@ function blocksPage() {
         block.updateBlocks(pageUtil);
         //监听下一页
         $("#next").click(() => {
+            if (pageUtil.currentPage == pageUtil.totalPage) {
+                alert('当前页已经是最后一页了');
+                return;
+            }
             pageUtil.currentPage += 1;
             block.updateBlocks(pageUtil);
         });
         $("#previous").click(() => {
+            if (pageUtil.currentPage <= 1) {
+                alert('当前已经是第一页了');
+                return;
+            }
             pageUtil.currentPage -= 1;
             block.updateBlocks(pageUtil);
         });
@@ -10591,14 +10627,19 @@ class Block {
         return __awaiter(this, void 0, void 0, function* () {
             let ajax = new Ajax_1.Ajax();
             var newDate = new Date();
-            let block = yield ajax.post('getblock', [index]);
-            console.log(block[0]);
-            newDate.setTime(block[0]['time'] * 1000);
-            $("#hash").text(block[0]['hash']);
-            $("#size").text(block[0]['size'] + ' byte');
+            let result = yield ajax.post('getblock', [index]);
+            let block = result[0];
+            console.log(block);
+            newDate.setTime(block['time'] * 1000);
+            $("#hash").text(block['hash']);
+            $("#size").text(block['size'] + ' byte');
             $("#time").text(newDate.toLocaleString());
-            $("#version").text(block[0]['version']);
-            $("#index").text(block[0]['index']);
+            $("#version").text(block['version']);
+            $("#index").text(block['index']);
+            let txs = block['tx'];
+            txs.forEach(tx => {
+                $("#txs").append('<tr><td>' + tx.txid + '</a></td><td>' + tx.type + ' bytes</td><td>' + tx.size + '</td><td>' + tx.version + '</td></tr>');
+            });
         });
     }
 }

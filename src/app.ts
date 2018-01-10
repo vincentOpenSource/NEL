@@ -42,10 +42,18 @@ async function blocksPage(){
     
     //监听下一页
     $("#next").click(()=>{
+        if(pageUtil.currentPage==pageUtil.totalPage){
+            alert('当前页已经是最后一页了');
+            return;
+        }
         pageUtil.currentPage +=1;
         block.updateBlocks(pageUtil);
     });
     $("#previous").click(()=>{
+        if(pageUtil.currentPage <=1){
+            alert('当前已经是第一页了');
+            return;
+        }
         pageUtil.currentPage -=1;
         block.updateBlocks(pageUtil);
     });

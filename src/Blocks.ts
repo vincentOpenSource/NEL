@@ -24,17 +24,34 @@ export class Block{
             $("#blocks").append('<tr><td><a href="../page/blockInfo.html?index='+item['index']+'">'+item['index']+'</a></td><td>'+item['size']+' bytes</td><td>'+newDate.toLocaleString()+'</td></tr>')
         });
     }
+
     public async queryBlock(index:number){
         let ajax:Ajax = new Ajax();
         var newDate = new Date();
-        let block = await ajax.post('getblock',[index]);
-        console.log(block[0]);
-        newDate.setTime(block[0]['time'] * 1000);
-        $("#hash").text(block[0]['hash']);
-        $("#size").text(block[0]['size']+' byte');
+        let result = await ajax.post('getblock',[index]);
+        let block = result[0];
+        console.log(block);
+        newDate.setTime(block['time'] * 1000);
+        $("#hash").text(block['hash']);
+        $("#size").text(block['size']+' byte');
         $("#time").text(newDate.toLocaleString());
-        $("#version").text(block[0]['version']);
-        $("#index").text(block[0]['index']);
-        
+        $("#version").text(block['version']);
+        $("#index").text(block['index']);
+        let txs:{
+            attributes:any[],
+            net_fee:string,
+            nonce:number,
+            scripts:any[],
+            size:number,
+            sys_fee:string,
+            txid:string,
+            type:string,
+            version:number
+        }[] = block['tx']
+        txs.forEach(tx => {
+            $("#txs").append('<tr><td>'+tx.txid+'</a></td><td>'+tx.type+' bytes</td><td>'+tx.size+'</td><td>'+tx.version+'</td></tr>')
+        });
+
+
     }
 }
