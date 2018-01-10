@@ -28,6 +28,7 @@ export class Block{
         let ajax:Ajax = new Ajax();
         var newDate = new Date();
         let block = await ajax.post('getblock',[index]);
+        console.log(block[0]);
         newDate.setTime(block[0]['time'] * 1000);
         $("#hash").text(block[0]['hash']);
         $("#size").text(block[0]['size']+' byte');
