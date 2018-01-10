@@ -34,5 +34,6 @@ export class Block{
         $("#time").text(newDate.toLocaleString());
         $("#version").text(block[0]['version']);
         $("#index").text(block[0]['index']);
+        
     }
 }
