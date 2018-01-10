@@ -10588,7 +10588,7 @@ class Block {
             $("#size").text(block[0]['size'] + ' byte');
             $("#time").text(newDate.toLocaleString());
             $("#version").text(block[0]['version']);
-            console.log(block);
+            $('index').text(block[0]["index"]);
         });
     }
 }
