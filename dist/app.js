@@ -10592,7 +10592,6 @@ class Block {
             let ajax = new Ajax_1.Ajax();
             var newDate = new Date();
             let block = yield ajax.post('getblock', [index]);
-            console.log(block[0]);
             newDate.setTime(block[0]['time'] * 1000);
             $("#hash").text(block[0]['hash']);
             $("#size").text(block[0]['size'] + ' byte');
