@@ -34,6 +34,6 @@ export class Block{
         $("#size").text(block[0]['size']+' byte');
         $("#time").text(newDate.toLocaleString());
         $("#version").text(block[0]['version']);
-        $('index').text(block[0]['index']);
+        $("#index").text(block[0]['index']);
     }
 }
