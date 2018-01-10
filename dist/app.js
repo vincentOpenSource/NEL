@@ -10447,12 +10447,25 @@ $(() => {
     if (page === 'transction') {
     }
     if (page === 'blockInfo') {
-        let blockIndex = location.hash.slice(1);
-        alert(blockIndex);
+        let index = Number(GetQueryString("index"));
         let block = new blocks_1.Block();
-        block.queryBlock(blockIndex);
+        block.queryBlock(index);
     }
 });
+/**
+ * 页面获取参数方法
+ * @param name
+ * @returns
+ */
+var LocString = String(location.href);
+function GetQueryString(name) {
+    var rs = new RegExp("(^|)" + name + "=([^&]*)(&|$)", "gi").exec(LocString), tmp;
+    if (tmp = rs) {
+        return decodeURI(tmp[2]);
+    }
+    // parameter cannot be found
+    return "";
+}
 
 
 /***/ }),

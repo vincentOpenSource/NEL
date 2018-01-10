@@ -66,10 +66,23 @@ $(()=>{
 
     }
     if(page==='blockInfo'){
-        let blockIndex:any= location.hash.slice(1);
-        alert(blockIndex);
+        let index:number = Number(GetQueryString("index"));
         let block:Block = new Block();
-        block.queryBlock(blockIndex);
-        
+        block.queryBlock(index);
     }
 });
+
+/**
+ * 页面获取参数方法
+ * @param name
+ * @returns
+ */
+var LocString = String(location.href);
+function GetQueryString(name):string {
+    var rs = new RegExp("(^|)" + name + "=([^&]*)(&|$)", "gi").exec(LocString), tmp;
+    if (tmp = rs) {
+        return decodeURI(tmp[2]);
+    }
+    // parameter cannot be found
+    return "";
+}
