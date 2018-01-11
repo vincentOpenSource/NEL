@@ -21,7 +21,12 @@ export class Block{
         blocks.forEach((item,index,input)=>{
             var newDate = new Date();
             newDate.setTime(item['time'] * 1000);
-            $("#blocks").append('<tr><td><a href="../page/blockInfo.html?index='+item['index']+'">'+item['index']+'</a></td><td>'+item['size']+' bytes</td><td>'+newDate.toLocaleString()+'</td></tr>')
+            let html:string;
+            html+='<tr><td>'
+            html+='<a href="../page/blockInfo.html?index='+item['index']+'">';
+            html+=item['index']+'</a></td><td>'+item['size'];
+            html+=' bytes</td><td>'+newDate.toLocaleString()+'</td></tr>';
+            $("#blocks").append(html);
         });
     }
 
@@ -49,7 +54,7 @@ export class Block{
             version:number
         }[] = block['tx']
         txs.forEach(tx => {
-            $("#txs").append('<tr><td>'+tx.txid+'</a></td><td>'+tx.type+' bytes</td><td>'+tx.size+'</td><td>'+tx.version+'</td></tr>')
+            $("#txs").append('<tr><td>'+tx.txid+'</a></td><td>'+tx.type+'</td><td>'+tx.size+' bytes</td><td>'+tx.version+'</td></tr>')
         });
 
 

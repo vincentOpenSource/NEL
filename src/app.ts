@@ -26,6 +26,34 @@ async function indexPage(){
         newDate.setTime(item['time'] * 1000);
         $("#blocks").append('<tr><td>'+item['index']+'</td><td>'+item['size']+' bytes</td><td>'+newDate.toLocaleString()+'</td></tr>')
     });
+
+    //分页查询交易记录
+    let txs:{
+        txid:string,
+        size:number,
+        type:string,
+        version:number,
+        blockindex:number,
+        gas:string,
+    }[] = await ajax.post('getrawtransactions',[10,1]);
+    txs.forEach((tx)=>{
+        let html:string="";
+        html+="<tr>"
+        html+="<td>"+tx.txid
+        html+="</td>"
+        html+="<td>"+tx.type
+        html+="</td>"
+        html+="<td>"+(tx.gas==undefined?'':tx.gas)
+        html+="</td>"
+        html+="<td>"+tx.blockindex
+        html+="</td>"
+        html+="<td>"+tx.size
+        html+="</td>"
+        html+="</tr>"
+        $("#transactions").append(html);
+    });
+    $("#transactions").tab()
+
 };
 
 //区块列表
