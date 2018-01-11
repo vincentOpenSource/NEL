@@ -3,6 +3,7 @@ import * as bootstrap from "bootstrap";
 import {Ajax as Ajax} from "./Ajax";
 import {PageUtil as PageUtil} from "./Entitys";
 import {Block as Block}from "./blocks";
+import {Trasction as Trasction}from "./Trasction";
 
 let ajax:Ajax = new Ajax();
 
@@ -47,12 +48,11 @@ async function indexPage(){
         html+="</td>"
         html+="<td>"+tx.blockindex
         html+="</td>"
-        html+="<td>"+tx.size
+        html+="<td>"+tx.size+" bytes"
         html+="</td>"
         html+="</tr>"
         $("#transactions").append(html);
     });
-    $("#transactions").tab()
 
 };
 
@@ -105,7 +105,10 @@ $(()=>{
         });
     }
     if(page==='transction'){
-
+        $("#blocks").empty();
+        let pageUtil:PageUtil = new PageUtil(100000,15);
+        let ts:Trasction = new Trasction();
+        ts.updateTrasction(pageUtil);
     }
     if(page==='blockInfo'){
         let index:number = Number(GetQueryString("index"));

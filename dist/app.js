@@ -10418,6 +10418,7 @@ const $ = __webpack_require__(0);
 const Ajax_1 = __webpack_require__(1);
 const Entitys_1 = __webpack_require__(3);
 const blocks_1 = __webpack_require__(4);
+const Trasction_1 = __webpack_require__(5);
 let ajax = new Ajax_1.Ajax();
 //主页
 function indexPage() {
@@ -10450,12 +10451,11 @@ function indexPage() {
             html += "</td>";
             html += "<td>" + tx.blockindex;
             html += "</td>";
-            html += "<td>" + tx.size;
+            html += "<td>" + tx.size + " bytes";
             html += "</td>";
             html += "</tr>";
             $("#transactions").append(html);
         });
-        $("#transactions").tab();
     });
 }
 ;
@@ -10505,6 +10505,10 @@ $(() => {
         });
     }
     if (page === 'transction') {
+        $("#blocks").empty();
+        let pageUtil = new Entitys_1.PageUtil(100000, 15);
+        let ts = new Trasction_1.Trasction();
+        ts.updateTrasction(pageUtil);
     }
     if (page === 'blockInfo') {
         let index = Number(GetQueryString("index"));
@@ -10667,6 +10671,54 @@ class Block {
     }
 }
 exports.Block = Block;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const $ = __webpack_require__(0);
+const Ajax_1 = __webpack_require__(1);
+class Trasction {
+    constructor() { }
+    updateTrasction(pageUtil) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let ajax = new Ajax_1.Ajax();
+            //分页查询交易记录
+            let txs = yield ajax.post('getrawtransactions', [pageUtil.pageSize, pageUtil.currentPage]);
+            txs.forEach((tx) => {
+                console.log(tx);
+                let html = "";
+                html += "<tr>";
+                html += "<td>" + tx.txid;
+                html += "</td>";
+                html += "<td>" + tx.type;
+                html += "</td>";
+                html += "<td>" + (tx.gas == undefined ? '' : tx.gas);
+                html += "</td>";
+                html += "<td>" + tx.blockindex;
+                html += "</td>";
+                html += "<td>" + tx.size;
+                html += "</td>";
+                html += "</tr>";
+                html += "<tr><a>0x41de3665b5f302775411a94bcb17283e2470437b00d1584e0e7dd155acde80cc0x41de3665b5f302775411a94bcb17283e2470437b00d1584e0e7dd155acde80ccdd155acde80cc</a></tr>";
+                $("#transactions").append(html);
+            });
+        });
+    }
+}
+exports.Trasction = Trasction;
 
 
 /***/ })

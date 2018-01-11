@@ -59,3 +59,13 @@ export class PageUtil{
         return this._totalPage;
     }
 }
+export interface Tx {
+    txid:string;
+    size:number;
+    type:string;
+    version:number;
+    blockindex:number;
+    gas:string;
+    vin:any[];
+    vout:any[];   
+}
