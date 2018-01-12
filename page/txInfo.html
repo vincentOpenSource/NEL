@@ -13,7 +13,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/nelstyle.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <!-- <link href="navbar.css" rel="stylesheet"> -->
@@ -71,59 +70,67 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <caption><h2>交易详情</h2></caption>
-        <h3></h3>
+        <h4 id="txInfo"></h4>
         <div class="container">
-                <section id="asset-information" class="corner-box bar-left-transactions">
-
-                        <div class="transaction-panel">
-                        <div class="sent-from-wrapper">
-                        <p class="large-detail-text">Sent from</p>
-                        <div class="individual-transaction">
-                        <a href="https://neoscan-testnet.io/address/AT5AVHBxp4TH5k5ni1x2m81P7HgaJUW8h7" alt="View wallet address" title="View wallet address" class="large-blue-link wallet-address"><span class="fa fa-key"></span>AT5AVHBxp4TH5k5ni1x2m81P7HgaJUW8h7</a>
-                        <p class="neo-amount large-blue-link"><span class="fa fa-cubes"></span>14 NEO</p>
-                        </div>
-                        </div>
-                        <img src="./NEOSCAN _ Transaction_files/ICON_Sent-arrow-4dbfcddbc24a63c628e7f9523a427acb.svg" class="transaction-sent-arrow">
-                        <div class="sent-to-wrapper">
-                        <p class="large-detail-text">Sent to</p>
-                        <div class="individual-transaction">
-                        <a href="https://neoscan-testnet.io/address/AcHiTm2Mb1NzYAGVBs4K4J5kCCdRHKB2MU" alt="View wallet address" title="View wallet address" class="large-blue-link wallet-address"><span class="fa fa-key"></span>AcHiTm2Mb1NzYAGVBs4K4J5kCCdRHKB2MU</a>
-                        <p class="gas-amount large-blue-link"><span class="fa fa-cube"></span>1 NEO</p>
-                        </div>
-                        <div class="individual-transaction">
-                        <a href="https://neoscan-testnet.io/address/AT5AVHBxp4TH5k5ni1x2m81P7HgaJUW8h7" alt="View wallet address" title="View wallet address" class="large-blue-link wallet-address"><span class="fa fa-key"></span>AT5AVHBxp4TH5k5ni1x2m81P7HgaJUW8h7</a>
-                        <p class="gas-amount large-blue-link"><span class="fa fa-cube"></span>13 NEO</p>
-                        </div>
-                        </div>
-                        </div>
-                        
-                        <ul id="extra-information">
-                        <li class="border-right border-bottom border-right-smaller min-height-97px remove-border-right-660px tooltip ">
-                        <p class="small-detail-text">Time</p>
-                        <p class="large-detail-text">36 minutes ago</p>
-                        <span class="tooltiptext">Time the transaction was included in the blockchain</span>
-                        </li>
-                        <li class="border-right border-bottom min-height-97px tooltip">
-                        <p class="small-detail-text">Network Fee</p>
-                        <p class="large-detail-text">0</p>
-                        <span class="tooltiptext">Gas charged by the consensus nodes for confiming a transaction and including it in the blockchain.</span>
-                        </li>
-                        <li class="border-bottom border-right-smaller min-height-97px remove-border-right-660px tooltip ">
-                        <p class="small-detail-text">System Fee</p>
-                        <p class="large-detail-text">0</p>
-                        <span class="tooltiptext">Cost in gas charged under NEO system fees for confiming a transaction and including it in the blockchain. The system fees are distributed to NEO holders</span>
-                        </li>
-                        <li class="border-right border-right-smaller min-height-97px remove-border-right-660px">
-                        <p class="small-detail-text">Included in Block</p>
-                        <p class="large-detail-text"><a href="https://neoscan-testnet.io/block/4eff288db1335d5cb764b4210cce554db2eadc86493685be069f17faa2d9b2b8" alt="View block" title="View block" class="large-blue-link col-4-width">997,189</a></p>
-                        </li>
-                        <li class="min-height-97px border-right remove-border-bottom-660px border-bottom-smaller tooltip ">
-                        <p class="small-detail-text">Size</p>
-                        <p class="large-detail-text">262 bytes</p>
-                        <span class="tooltiptext">Size of the transaction in bytes</span>
-                        </li>
-                        </ul>
-                        </section>
+          <div class="row">
+             <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                          区块索引
+                        </h3>
+                    </div>
+                    <div id="index" class="panel-body" style="word-break:break-all;">
+                    </div>
+                </div> 
+              </div>
+              <div class="col-md-4">
+                 <div class="panel panel-default" style="height:100%">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            大小
+                        </h3>
+                    </div>
+                     <div id="size" class="panel-body" style="word-break:break-all;">
+                     </div>
+                 </div> 
+               </div>
+               <div class="col-md-4">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">
+                              日期
+                          </h3>
+                      </div>
+                      <div id="time" class="panel-body" style="word-break:break-all;">
+                      </div>
+                  </div> 
+                </div>
+          </div>
+          <div class="row">
+             <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                          来自
+                        </h3>
+                    </div>
+                    <ul id="from" class="list-group">
+                    </ul>
+                </div> 
+              </div>
+              <div class="col-md-6">
+                 <div class="panel panel-default" style="height:100%">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            发给
+                        </h3>
+                    </div>
+                    <ul id="to" class="list-group">
+                    </ul>
+                 </div> 
+               </div>
+          </div>
        </div>
       </div>
 
@@ -133,7 +140,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <input id="page" value="blockInfo" hidden>
+    <input id="page" value="txInfo" hidden>
     <script src="../dist/app.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   </body>

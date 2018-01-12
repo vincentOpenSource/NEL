@@ -66,6 +66,14 @@ export interface Tx {
     version:number;
     blockindex:number;
     gas:string;
-    vin:any[];
-    vout:any[];   
+    vin:{
+        txid:string;
+        vout:number;
+    }[];
+    vout:{
+        address:string;
+        asset:string;
+        n:number;
+        value:string;
+    }[];   
 }

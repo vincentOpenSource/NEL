@@ -105,10 +105,14 @@ $(()=>{
         });
     }
     if(page==='transction'){
-        $("#blocks").empty();
         let pageUtil:PageUtil = new PageUtil(100000,15);
         let ts:Trasction = new Trasction();
-        ts.updateTrasction(pageUtil);
+        ts.updateTrasctions(pageUtil);
+    }
+    if(page==='txInfo'){
+        let txid:string = GetQueryString("txid");
+        let ts:Trasction = new Trasction();
+        ts.updateTxInfo(txid);
     }
     if(page==='blockInfo'){
         let index:number = Number(GetQueryString("index"));

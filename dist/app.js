@@ -10505,10 +10505,14 @@ $(() => {
         });
     }
     if (page === 'transction') {
-        $("#blocks").empty();
         let pageUtil = new Entitys_1.PageUtil(100000, 15);
         let ts = new Trasction_1.Trasction();
-        ts.updateTrasction(pageUtil);
+        ts.updateTrasctions(pageUtil);
+    }
+    if (page === 'txInfo') {
+        let txid = GetQueryString("txid");
+        let ts = new Trasction_1.Trasction();
+        ts.updateTxInfo(txid);
     }
     if (page === 'blockInfo') {
         let index = Number(GetQueryString("index"));
@@ -10691,17 +10695,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const $ = __webpack_require__(0);
 const Ajax_1 = __webpack_require__(1);
 class Trasction {
-    constructor() { }
-    updateTrasction(pageUtil) {
+    constructor() {
+        this.ajax = new Ajax_1.Ajax();
+    }
+    updateTrasctions(pageUtil) {
         return __awaiter(this, void 0, void 0, function* () {
-            let ajax = new Ajax_1.Ajax();
             //分页查询交易记录
-            let txs = yield ajax.post('getrawtransactions', [pageUtil.pageSize, pageUtil.currentPage]);
+            let txs = yield this.ajax.post('getrawtransactions', [pageUtil.pageSize, pageUtil.currentPage]);
             txs.forEach((tx) => {
                 console.log(tx);
                 let html = "";
                 html += "<tr>";
-                html += "<td><a href='./txInfo.html'>" + tx.txid;
+                html += "<td><a href='./txInfo.html?txid=" + tx.txid + "'>" + tx.txid;
                 html += "</a></td>";
                 html += "<td>" + tx.type;
                 html += "</td>";
@@ -10713,6 +10718,19 @@ class Trasction {
                 html += "</td>";
                 html += "</tr>";
                 $("#transactions").append(html);
+            });
+        });
+    }
+    updateTxInfo(txid) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let txInfos = yield this.ajax.post('getrawtransaction', [txid]);
+            let txInfo = txInfos[0];
+            $("#txInfo").text(txInfo.type + " | Hash: " + txInfo.txid);
+            // $().text(txInfo[0].vin[0].txid)
+            $("#index").text(txInfo.blockindex);
+            $("#size").text(txInfo.size);
+            txInfo.vout.forEach(vout => {
+                $("#to").append('<li class="list-group-item">' + vout.address + ' ' + vout.value + ' NEO</li>');
             });
         });
     }
