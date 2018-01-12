@@ -13,8 +13,8 @@ export class Trasction{
             console.log(tx);
             let html:string="";
             html+="<tr>"
-            html+="<td>"+tx.txid
-            html+="</td>"
+            html+="<td><a href='./txInfo.html'>"+tx.txid
+            html+="</a></td>"
             html+="<td>"+tx.type
             html+="</td>"
             html+="<td>"+(tx.gas==undefined?'':tx.gas)

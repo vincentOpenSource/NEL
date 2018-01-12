@@ -10701,8 +10701,8 @@ class Trasction {
                 console.log(tx);
                 let html = "";
                 html += "<tr>";
-                html += "<td>" + tx.txid;
-                html += "</td>";
+                html += "<td><a href='./txInfo.html'>" + tx.txid;
+                html += "</a></td>";
                 html += "<td>" + tx.type;
                 html += "</td>";
                 html += "<td>" + (tx.gas == undefined ? '' : tx.gas);
@@ -10712,7 +10712,6 @@ class Trasction {
                 html += "<td>" + tx.size;
                 html += "</td>";
                 html += "</tr>";
-                html += "<tr><a>0x41de3665b5f302775411a94bcb17283e2470437b00d1584e0e7dd155acde80cc0x41de3665b5f302775411a94bcb17283e2470437b00d1584e0e7dd155acde80ccdd155acde80cc</a></tr>";
                 $("#transactions").append(html);
             });
         });
