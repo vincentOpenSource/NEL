@@ -10728,7 +10728,13 @@ class Trasction {
             $("#txInfo").text(txInfo.type + " | Hash: " + txInfo.txid);
             // $().text(txInfo[0].vin[0].txid)
             $("#index").text(txInfo.blockindex);
-            $("#size").text(txInfo.size);
+            $("#size").text(txInfo.size + " bytes");
+            txInfo.vin.forEach((vin, index, arry) => __awaiter(this, void 0, void 0, function* () {
+                let txInfos = yield this.ajax.post('getrawtransaction', [vin.txid]);
+                let address = txInfos[0].vout[vin.vout].address;
+                let value = txInfos[0].vout[vin.vout].value;
+                $("#from").append('<li class="list-group-item">' + address + ' ' + value + ' NEO</li>');
+            }));
             txInfo.vout.forEach(vout => {
                 $("#to").append('<li class="list-group-item">' + vout.address + ' ' + vout.value + ' NEO</li>');
             });

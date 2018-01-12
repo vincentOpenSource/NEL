@@ -34,10 +34,16 @@ export class Trasction{
         $("#txInfo").text(txInfo.type+" | Hash: "+txInfo.txid);
         // $().text(txInfo[0].vin[0].txid)
         $("#index").text(txInfo.blockindex);
-        $("#size").text(txInfo.size);
+        $("#size").text(txInfo.size+" bytes");
         
+        txInfo.vin.forEach(async (vin,index,arry)=>{
+            let txInfos:Tx[] = await this.ajax.post('getrawtransaction',[vin.txid]);
+            let address:string = txInfos[0].vout[vin.vout].address;
+            let value :string = txInfos[0].vout[vin.vout].value;
+            $("#from").append('<li class="list-group-item">'+address+' '+value+' NEO</li>');
+        });
         txInfo.vout.forEach(vout=>{
-            $("#to").append('<li class="list-group-item">'+vout.address+' '+vout.value+' NEO</li>')
-        })
+            $("#to").append('<li class="list-group-item">'+vout.address+' '+vout.value+' NEO</li>');
+        });
     }
 }
