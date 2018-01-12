@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>NEL NewEconnolab</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/nelstyle.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="navbar.css" rel="stylesheet"> -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">NEL</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="../index.html">概览</a></li>
+              <li class="active"><a href="#">交易</a></li>
+              <li><a href="#">地址</a></li>
+              <li><a href="#">区块</a></li>
+              <li><a href="#">合约</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">中文</a></li>
+                  <li><a href="#">English</a></li>
+                </ul>
+              </li>
+            </ul>          
+            <form class="navbar-form navbar-right input-append">
+              <input id="searchText" type="text" class="form-control" placeholder="交易哈希/钱包地址/区块高度">
+              <button id="searchBtn" class="btn" type="button">Go!</button>
+            </form>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <caption><h2>交易详情</h2></caption>
+        <h3></h3>
+        <div class="container">
+                <section id="asset-information" class="corner-box bar-left-transactions">
+
+                        <div class="transaction-panel">
+                        <div class="sent-from-wrapper">
+                        <p class="large-detail-text">Sent from</p>
+                        <div class="individual-transaction">
+                        <a href="https://neoscan-testnet.io/address/AT5AVHBxp4TH5k5ni1x2m81P7HgaJUW8h7" alt="View wallet address" title="View wallet address" class="large-blue-link wallet-address"><span class="fa fa-key"></span>AT5AVHBxp4TH5k5ni1x2m81P7HgaJUW8h7</a>
+                        <p class="neo-amount large-blue-link"><span class="fa fa-cubes"></span>14 NEO</p>
+                        </div>
+                        </div>
+                        <img src="./NEOSCAN _ Transaction_files/ICON_Sent-arrow-4dbfcddbc24a63c628e7f9523a427acb.svg" class="transaction-sent-arrow">
+                        <div class="sent-to-wrapper">
+                        <p class="large-detail-text">Sent to</p>
+                        <div class="individual-transaction">
+                        <a href="https://neoscan-testnet.io/address/AcHiTm2Mb1NzYAGVBs4K4J5kCCdRHKB2MU" alt="View wallet address" title="View wallet address" class="large-blue-link wallet-address"><span class="fa fa-key"></span>AcHiTm2Mb1NzYAGVBs4K4J5kCCdRHKB2MU</a>
+                        <p class="gas-amount large-blue-link"><span class="fa fa-cube"></span>1 NEO</p>
+                        </div>
+                        <div class="individual-transaction">
+                        <a href="https://neoscan-testnet.io/address/AT5AVHBxp4TH5k5ni1x2m81P7HgaJUW8h7" alt="View wallet address" title="View wallet address" class="large-blue-link wallet-address"><span class="fa fa-key"></span>AT5AVHBxp4TH5k5ni1x2m81P7HgaJUW8h7</a>
+                        <p class="gas-amount large-blue-link"><span class="fa fa-cube"></span>13 NEO</p>
+                        </div>
+                        </div>
+                        </div>
+                        
+                        <ul id="extra-information">
+                        <li class="border-right border-bottom border-right-smaller min-height-97px remove-border-right-660px tooltip ">
+                        <p class="small-detail-text">Time</p>
+                        <p class="large-detail-text">36 minutes ago</p>
+                        <span class="tooltiptext">Time the transaction was included in the blockchain</span>
+                        </li>
+                        <li class="border-right border-bottom min-height-97px tooltip">
+                        <p class="small-detail-text">Network Fee</p>
+                        <p class="large-detail-text">0</p>
+                        <span class="tooltiptext">Gas charged by the consensus nodes for confiming a transaction and including it in the blockchain.</span>
+                        </li>
+                        <li class="border-bottom border-right-smaller min-height-97px remove-border-right-660px tooltip ">
+                        <p class="small-detail-text">System Fee</p>
+                        <p class="large-detail-text">0</p>
+                        <span class="tooltiptext">Cost in gas charged under NEO system fees for confiming a transaction and including it in the blockchain. The system fees are distributed to NEO holders</span>
+                        </li>
+                        <li class="border-right border-right-smaller min-height-97px remove-border-right-660px">
+                        <p class="small-detail-text">Included in Block</p>
+                        <p class="large-detail-text"><a href="https://neoscan-testnet.io/block/4eff288db1335d5cb764b4210cce554db2eadc86493685be069f17faa2d9b2b8" alt="View block" title="View block" class="large-blue-link col-4-width">997,189</a></p>
+                        </li>
+                        <li class="min-height-97px border-right remove-border-bottom-660px border-bottom-smaller tooltip ">
+                        <p class="small-detail-text">Size</p>
+                        <p class="large-detail-text">262 bytes</p>
+                        <span class="tooltiptext">Size of the transaction in bytes</span>
+                        </li>
+                        </ul>
+                        </section>
+       </div>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <input id="page" value="blockInfo" hidden>
+    <script src="../dist/app.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
+</html>
