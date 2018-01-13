@@ -19,7 +19,7 @@ export class Trasction{
             html+="</td>"
             html+="<td>"+(tx.gas==undefined?'':tx.gas)
             html+="</td>"
-            html+="<td>"+tx.blockindex
+            html+="<td><a href='./blcokInfo.html?index="+tx.blockindex+"'"+tx.blockindex
             html+="</td>"
             html+="<td>"+tx.size
             html+="</td>"

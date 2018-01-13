@@ -25,7 +25,7 @@ async function indexPage(){
     blocks.forEach((item,index,input)=>{
         var newDate = new Date();
         newDate.setTime(item['time'] * 1000);
-        $("#blocks").append('<tr><td>'+item['index']+'</td><td>'+item['size']+' bytes</td><td>'+newDate.toLocaleString()+'</td></tr>')
+        $("#blocks").append('<tr><td><a href="./page/blockInfo.html?index='+item['index']+'">'+item['index']+'</a></td><td>'+item['size']+' bytes</td><td>'+newDate.toLocaleString()+'</td></tr>')
     });
 
     //分页查询交易记录
@@ -40,7 +40,7 @@ async function indexPage(){
     txs.forEach((tx)=>{
         let html:string="";
         html+="<tr>"
-        html+="<td>"+tx.txid
+        html+="<td><a href='./page/txInfo.html?txid="+tx.txid+"'>"+tx.txid+"</a>"
         html+="</td>"
         html+="<td>"+tx.type
         html+="</td>"

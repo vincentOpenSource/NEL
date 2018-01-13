@@ -10436,14 +10436,14 @@ function indexPage() {
         blocks.forEach((item, index, input) => {
             var newDate = new Date();
             newDate.setTime(item['time'] * 1000);
-            $("#blocks").append('<tr><td>' + item['index'] + '</td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
+            $("#blocks").append('<tr><td><a href="./page/blockInfo.html?index=' + item['index'] + '">' + item['index'] + '</a></td><td>' + item['size'] + ' bytes</td><td>' + newDate.toLocaleString() + '</td></tr>');
         });
         //分页查询交易记录
         let txs = yield ajax.post('getrawtransactions', [10, 1]);
         txs.forEach((tx) => {
             let html = "";
             html += "<tr>";
-            html += "<td>" + tx.txid;
+            html += "<td><a href='./page/txInfo.html?txid=" + tx.txid + "'>" + tx.txid + "</a>";
             html += "</td>";
             html += "<td>" + tx.type;
             html += "</td>";
@@ -10669,7 +10669,7 @@ class Block {
             $("#index").text(block['index']);
             let txs = block['tx'];
             txs.forEach(tx => {
-                $("#txs").append('<tr><td>' + tx.txid + '</a></td><td>' + tx.type + '</td><td>' + tx.size + ' bytes</td><td>' + tx.version + '</td></tr>');
+                $("#txs").append('<tr><td><a href="./txInfo.html?txid=' + tx.txid + '">' + tx.txid + '</a></td><td>' + tx.type + '</td><td>' + tx.size + ' bytes</td><td>' + tx.version + '</td></tr>');
             });
         });
     }
@@ -10712,7 +10712,7 @@ class Trasction {
                 html += "</td>";
                 html += "<td>" + (tx.gas == undefined ? '' : tx.gas);
                 html += "</td>";
-                html += "<td>" + tx.blockindex;
+                html += "<td><a href='./blcokInfo.html?index=" + tx.blockindex + "'" + tx.blockindex;
                 html += "</td>";
                 html += "<td>" + tx.size;
                 html += "</td>";

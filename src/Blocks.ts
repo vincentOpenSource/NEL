@@ -54,7 +54,7 @@ export class Block{
             version:number
         }[] = block['tx']
         txs.forEach(tx => {
-            $("#txs").append('<tr><td>'+tx.txid+'</a></td><td>'+tx.type+'</td><td>'+tx.size+' bytes</td><td>'+tx.version+'</td></tr>')
+            $("#txs").append('<tr><td><a href="./txInfo.html?txid='+tx.txid+'">'+tx.txid+'</a></td><td>'+tx.type+'</td><td>'+tx.size+' bytes</td><td>'+tx.version+'</td></tr>');
         });
 
 
